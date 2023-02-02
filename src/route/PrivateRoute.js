@@ -1,11 +1,16 @@
 import React, { useEffect } from "react";
 import { Route, useHistory, useLocation } from "react-router-dom";
 import jwt_decode from 'jwt-decode';
-
+import LoadingOverlay from 'react-loading-overlay';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 
 const PrivateRoute = ({ exact, component: Component, ...rest }) => {
   const location = useLocation();
   const history = useHistory();
+  const checking = useSelector(state => state.user.checking);
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
 
@@ -26,13 +31,15 @@ const PrivateRoute = ({ exact, component: Component, ...rest }) => {
     
   }, [ location.pathname ])
   return ( // eslint-disable-line
-  <Route
-    exact={exact ? true : false}
-    rest
-    render={(props) =>
-        <Component {...props} {...rest}></Component>
-    }
-  ></Route>)
-};
+    <LoadingOverlay active={checking} spinner>
+      <Route
+        exact={exact ? true : false}
+        rest
+        render={(props) =>
+            <Component {...props} {...rest}></Component>
+        }
+      ></Route>
+    </LoadingOverlay>
+  )};
 
 export default PrivateRoute;

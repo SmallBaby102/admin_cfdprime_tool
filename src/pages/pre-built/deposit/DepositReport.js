@@ -439,7 +439,7 @@ const DepositReport = ({ history }) => {
                 <DataTableRow>
                   <span>User</span>
                 </DataTableRow>
-                <DataTableRow size="mb">
+                <DataTableRow size="mb" >
                   <span>Trading Account Id</span>
                 </DataTableRow>
                 <DataTableRow size="mb">
@@ -447,6 +447,9 @@ const DepositReport = ({ history }) => {
                 </DataTableRow>
                 <DataTableRow size="mb">
                   <span>Transfer Amount</span>
+                </DataTableRow>
+                <DataTableRow size="mb">
+                  <span>Code</span>
                 </DataTableRow>
                 <DataTableRow size="mb">
                   <span>Transfer Code</span>
@@ -512,6 +515,9 @@ const DepositReport = ({ history }) => {
                         </DataTableRow>
                         <DataTableRow size="mb">
                           <span className="tb-lead-sub">{parseFloat(item.transfer_amount)}</span>
+                        </DataTableRow>
+                        <DataTableRow size="mb">
+                          <span className="tb-lead-sub">{item.code}</span>
                         </DataTableRow>
                         <DataTableRow size="mb">
                           <span className="tb-lead-sub">{item.transfer_code}</span>

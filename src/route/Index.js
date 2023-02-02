@@ -9,6 +9,7 @@ import ProductList from "../pages/pre-built/products/ProductList";
 import ProductDetails from "../pages/pre-built/products/ProductDetails";
 import Setting from "../pages/pre-built/setting/Settings";
 import DepositReport from "../pages/pre-built/deposit/DepositReport";
+import Wallet from "../pages/pre-built/wallet/Wallet";
 
 const Pages = () => {
   useLayoutEffect(() => {
@@ -23,6 +24,7 @@ const Pages = () => {
         <Route exact path={`${process.env.PUBLIC_URL}/product-list`} component={ProductList}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/setting`} component={Setting}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/deposit`} component={DepositReport}></Route>
+        <Route exact path={`${process.env.PUBLIC_URL}/wallet`} component={Wallet}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/`} component={DepositReport}></Route>
         <Route component={RedirectAs404}></Route>
       </Switch>

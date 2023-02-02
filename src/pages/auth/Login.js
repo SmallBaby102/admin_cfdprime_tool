@@ -19,8 +19,13 @@ import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
-
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
+import { setAdmin } from "../../actions"
 const Login = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [passState, setPassState] = useState(false);
   const [email, setEmail] = useState("");
@@ -29,7 +34,23 @@ const Login = () => {
   const history = useHistory();
 
   const onFormSubmit = (formData) => {
-    
+    if(email === "" || password === "" ){
+      toast.warn("Please fill all fields!");
+      return;
+    }
+    setLoading(true);
+    axios.post(`${process.env.REACT_APP_API_SERVER}/api/auth/admin-signin`, { email, password })
+    .then(res => {
+      setLoading(false);
+      dispatch(setAdmin(res.data));
+      localStorage.setItem("accessToken", res.data.accessToken);
+      history.push("/deposit");
+    })
+    .catch(err => {
+      setLoading(false);
+      console.log(err)
+      toast.error(err.response.data.message);
+    })
   };
   const login = (e) => {
     if(email === "" || password === "" ){
@@ -40,6 +61,7 @@ const Login = () => {
     axios.post(`${process.env.REACT_APP_API_SERVER}/api/auth/admin-signin`, { email, password })
     .then(res => {
       setLoading(false);
+      dispatch(setAdmin(res.data));
       localStorage.setItem("accessToken", res.data.accessToken);
       history.push("/deposit");
     })
@@ -137,7 +159,7 @@ const Login = () => {
                 </div>
               </FormGroup>
               <FormGroup>
-                <Button size="lg" className="btn-block" type="button" onClick={e => login(e)} color="primary">
+                <Button size="lg" className="btn-block" type="submit"  color="primary">
                   {loading ? <Spinner size="sm" color="light" /> : "Sign in"}
                 </Button>
               </FormGroup>

@@ -11,5 +11,11 @@ const menu = [
     active: false,
     link: "/deposit",
   },
+  {
+    icon: "file-docs",
+    text: "Trading Accounts",
+    active: false,
+    link: "/wallet",
+  },
 ];
 export default menu;
