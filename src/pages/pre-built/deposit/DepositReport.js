@@ -181,7 +181,7 @@ const DepositReport = ({ history }) => {
                 <p>You have total {data.length} Deposit History.</p>
               </BlockDes>
             </BlockHeadContent>
-            <BlockHeadContent>
+            {/* <BlockHeadContent>
               <Button color="light" outline className="bg-white d-none d-sm-inline-flex">
                 <Icon name="download-cloud"></Icon>
                 <span>Export</span>
@@ -189,7 +189,7 @@ const DepositReport = ({ history }) => {
               <Button color="light" outline className="btn-icon bg-white d-inline-flex d-sm-none">
                 <Icon name="download-cloud"></Icon>
               </Button>
-            </BlockHeadContent>
+            </BlockHeadContent> */}
           </BlockBetween>
         </BlockHead>
 
