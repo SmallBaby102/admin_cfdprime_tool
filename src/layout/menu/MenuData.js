@@ -1,6 +1,6 @@
 const menu = [
   {
-    icon: "file-docs",
+    icon: "setting",
     text: "Settings",
     active: false,
     link: "/setting",
@@ -12,7 +12,7 @@ const menu = [
     link: "/deposit",
   },
   {
-    icon: "file-docs",
+    icon: "users",
     text: "Trading Accounts",
     active: false,
     link: "/wallet",
