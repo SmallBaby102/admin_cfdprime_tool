@@ -24,17 +24,6 @@ const Settings = () => {
     address: null,
     privateKey: null,
   });
-  const [setting, setSetting] = useState({
-    usdtPrice: 1,
-    usdtPrice: 1,
-    // payment
-    usdt: false,
-    bank: false,
-    npay: false,
-    neteller: false,
-    skrill: false,
-    sticpay: false,
-  });
   const save = e => {
     if (loading) {
       return;
@@ -50,7 +39,7 @@ const Settings = () => {
       return;
     }
     setLoading(true);
-    axios.post(`${process.env.REACT_APP_API_SERVER}/api/other/setting`, { setting, adminWallet })
+    axios.post(`${process.env.REACT_APP_API_SERVER}/api/other/setting`, { adminWallet })
     .then(res => {
         toast.success("Successfully updated!");
       setLoading(false);
@@ -61,9 +50,6 @@ const Settings = () => {
     })
   
   }
-  const onChangeRate = e => {
-    setSetting({ ...setting, usdtPrice: e.target.value});
-  }
   const onChangeAdminWalletAddress = e => {
     setAdminWallet({ ...adminWallet, address: e.target.value});
   }
@@ -73,14 +59,6 @@ const Settings = () => {
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_SERVER}/api/other/setting`)
     .then(res => {
-      let payments = {};
-      for (let index = 0; index < res.data.paymentMethods.length; index++) {
-        const element = res.data.paymentMethods[index];
-        payments = { ...payments, [element["name"]]: element["status"]}
-      } 
-      console.log(payments)
-      let usdtItem = res.data?.cryptoRates?.find(item => item.pair === "usdtPrice");
-      setSetting({ usdtPrice: usdtItem.rate, ...payments });
       setAdminWallet({ address: res.data?.adminWallet?.address, privateKey: res.data?.adminWallet?.privateKey });
     })
     .catch(err => {

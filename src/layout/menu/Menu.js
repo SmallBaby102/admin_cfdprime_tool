@@ -268,7 +268,7 @@ const Menu = ({ sidebarToggle, mobileView }) => {
     if (admin?.role !== "Super Admin") {
       let temp  = data.filter(item => {
         return item.text !== "Settings";
-      })
+      }) 
       setMenuData(temp);
     }
     data.forEach((item, index) => {
