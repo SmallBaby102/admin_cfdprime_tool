@@ -11,6 +11,8 @@ const PrivateRoute = ({ exact, component: Component, ...rest }) => {
   const location = useLocation();
   const history = useHistory();
   const checking = useSelector(state => state.user.checking);
+  const admin = useSelector(state => state.user.admin);
+
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
 
@@ -24,6 +26,11 @@ const PrivateRoute = ({ exact, component: Component, ...rest }) => {
       if ( decoded.exp < Date.now() / 1000 ) {
           history.push("/auth-login");
           return;
+      } else {
+        if(!admin){
+          const temp =  JSON.parse(localStorage.getItem("admin"));
+          dispatch(setAdmin(temp));
+        }
       }
     } catch (error) {
       history.push("/auth-login");

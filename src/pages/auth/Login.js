@@ -63,6 +63,8 @@ const Login = () => {
       setLoading(false);
       dispatch(setAdmin(res.data));
       localStorage.setItem("accessToken", res.data.accessToken);
+      localStorage.setItem("admin", JSON.stringify(res.data));
+
       history.push("/deposit");
     })
     .catch(err => {
